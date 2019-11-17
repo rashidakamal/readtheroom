@@ -42,6 +42,10 @@ function newCandidate(request, response){
 	console.log(allCandidates);
 
 	var content = "You have added " + candidateName + " as a candidate. Their ID is " + candidateID + ".\n";
+
+	response.header("Access-Control-Allow-Origin", "*");
+  	response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+
 	response.send(content);
 	response.end();
 
@@ -68,6 +72,9 @@ function candidateRating(request, response){
 	console.log(currentCandidateRatings); 
 	console.log(averageRating); 
 
+	response.header("Access-Control-Allow-Origin", "*");
+  	response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+
 	var content = "printing average rating to log";
 	response.send(content);
 	response.end();
@@ -86,6 +93,9 @@ function vote(request, response) {
 
 	var newVote = {time: Date.now(), rating: newRating};
 	currentCandidateRatings.push(newVote);
+
+	response.header("Access-Control-Allow-Origin", "*");
+  	response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
 	// edit this so we're returning json, not messages. 
 	var content = "trying to vote damnnit";
@@ -110,6 +120,10 @@ function candidateHistory(request, response) {
 function defaultContent(request, response){
 
 	var content = "This is the default content.";
+
+	response.header("Access-Control-Allow-Origin", "*");
+  	response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+
 	response.send(content);
 	response.end();
 
