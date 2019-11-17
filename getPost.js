@@ -8,6 +8,9 @@
   	modified 4 Feb 2018
 	by Tom Igoe
 
+	modified again by Rashida Kamal
+	17 Nov 2019
+
 */
 
 var allCandidates = [];  // this will become a list of lists! 
