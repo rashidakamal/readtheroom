@@ -7,18 +7,18 @@
 	var timeDiv;
 
 	function setup() {
-		// httpGet('/date', update);
-		timeDiv = document.getElementById('time');
+		httpGet('/default', update);
+		timeDiv = document.getElementById('defaultContent');
 	}
 	function update(response) {
 		timeDiv.innerHTML = response;
-		// httpGet('/date', update);
+		httpGet('/default', update);
 	}
 
 	</script>
 	</head>
 	<body>
 		Hello World!
-		<div id="time"></div>
+		<div id="defaultContent"></div>
 	</body>
 </html>
