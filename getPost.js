@@ -13,12 +13,12 @@
 
 */
 
-var allCandidates = [];  // this will become a list of lists! 
-var voters = []; 
+let allCandidates = [];  // this will become a list of lists! 
+let canNames = []
 
-var express = require('express');			    // include express.js
-var server = express();						        // a local instance of it
-var bodyParser = require('body-parser');	// include body-parser
+const express = require('express');			    // include express.js
+const server = express();						        // a local instance of it
+const bodyParser = require('body-parser');	// include body-parser
 
 server.use('/',express.static('public')); // serve static files from /public
 
@@ -28,58 +28,52 @@ server.use(bodyParser.urlencoded({extended: false})); // for application/x-www-f
 
 // this runs after the server successfully starts:
 function serverStart() {
-  var port = this.address().port;
+  let port = this.address().port;
   console.log('Server listening on port '+ port);
 }
 
 function newCandidate(request, response){
 
-	console.log("I got a GET request");
-	var candidateName = request.params.name;
+	let candidateName = request.params.name;
 
-	// console.log("in newCandidate");
-	var defaultList = []; 
+	let defaultList = []; 
 	
 	allCandidates.push(defaultList); // adding a default value to the end of our candidates array
-	var candidateID = allCandidates.length - 1;
-	console.log(allCandidates);
+	canNames.push(candidateName);
+	let candidateID = allCandidates.length - 1;
 
-	var content = "You have added " + candidateName + " as a candidate. Their ID is " + candidateID + ".\n";
+	let content = "You have added " + candidateName + " as a candidate. Their ID is " + candidateID + ".\n";
 
 	response.header("Access-Control-Allow-Origin", "*");
   	response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
-	response.send(content);
+	response.json({Name: candidateName, ID: candidateID})
 	response.end();
 
 }
 
 function candidateRating(request, response){
 
-	var candidateID = request.params.num;
+	let candidateID = request.params.num;
 
-	var currentCandidateRatings = allCandidates[candidateID]; // this is a list! 
+	let currentCandidateRatings = allCandidates[candidateID]; // this is a list! 
 
-	var sumRatings = []; 
+	let sumRatings = []; 
 
 		for (i=0; i < currentCandidateRatings.length; i++) {
 
-			var iRating = currentCandidateRatings[i].rating; 
+			let iRating = currentCandidateRatings[i].rating; 
 			sumRatings.push(iRating);
-			console.log(iRating); 
 
 		}
-	var averageRating = sumRatings.reduce((a,b) => a + b, 0) / currentCandidateRatings.length; 
-
-	console.log("Current average rating for candidate: " + candidateID + " is ");
-	console.log(currentCandidateRatings); 
-	console.log(averageRating); 
+	let averageRating = sumRatings.reduce((a,b) => a + b, 0) / currentCandidateRatings.length; 
 
 	response.header("Access-Control-Allow-Origin", "*");
   	response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
-	var content = "printing average rating to log";
-	response.send(content);
+	let content = averageRating.toString();
+	// response.send(content);
+	response.json({Name: canNames[candidateID], Average: content})
 	response.end();
 
 }
@@ -87,42 +81,38 @@ function candidateRating(request, response){
 
 function vote(request, response) {
 
-	var candidateID = request.params.num;
-	var newRating = parseInt(request.params.vote); 
+	let candidateID = request.params.num;
+	let newRating = parseInt(request.params.vote); 
 
 		// need to implement some logic to ensure that ratings are not below 0 or above 5
 
 	currentCandidateRatings = allCandidates[candidateID]; 
 
-	var newVote = {time: Date.now(), rating: newRating};
+	let newVote = {time: Date.now(), rating: newRating};
 	currentCandidateRatings.push(newVote);
 
 	response.header("Access-Control-Allow-Origin", "*");
   	response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
 	// edit this so we're returning json, not messages. 
-	var content = "trying to vote damnnit";
-	response.send(content);
+	let content = "Vote submitted.";
+	// response.send(content);
+	response.json({Name: canNames[candidateID], Time: Date.now(), Rating: newRating});
 	response.end();
 
 }
 
 function candidateHistory(request, response) {
 
-	// Dear Andrew and Jackie,
-	// If you'd like, you can maybe parse our vote objects for ratings and timestamps, and then provide an average of rating for a given duration of time
-	// Ya know, some sort of candidate history...
-	// Chart?
-	// Json?
-
-	// much love,
-	// Anna, Rashida, & SJ
+	// average vote for X duration of time. Votes are all timestamped, so can be regrouped by minute, 2-minute, 15-min intervals, hour, etc. 
+	// the interval can may be specified by a param
+	// this should return json in which each time interval has an average rating assocaited with it
 
 }
 
 function defaultContent(request, response){
 
-	var content = "This is the default content.";
+	let content = "This is the default content.";
 
 	response.header("Access-Control-Allow-Origin", "*");
   	response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
