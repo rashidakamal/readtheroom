@@ -32,6 +32,18 @@ function serverStart() {
   console.log('Server listening on port '+ port);
 }
 
+function defaultContent(request, response){
+
+	let content = "This is the default content.";
+
+	response.header("Access-Control-Allow-Origin", "*");
+  	response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+
+	response.send(content);
+	response.end();
+
+}
+
 function newCandidate(request, response){
 
 	let candidateName = request.params.name;
@@ -52,75 +64,61 @@ function newCandidate(request, response){
 
 }
 
-function candidateRating(request, response){
+// function vote(request, response) {
 
-	let candidateID = request.params.num;
+// 	let candidateID = request.params.num;
+// 	let newRating = parseInt(request.params.vote); 
 
-	let currentCandidateRatings = allCandidates[candidateID]; // this is a list! 
+// 		// need to implement some logic to ensure that ratings are not below 0 or above 5
 
-	let sumRatings = []; 
+// 	currentCandidateRatings = allCandidates[candidateID]; 
 
-		for (i=0; i < currentCandidateRatings.length; i++) {
+// 	let newVote = {id: candidateID, name: canNames[candidateID], time: Date.now(), rating: newRating};
+// 	currentCandidateRatings.push(newVote);
 
-			let iRating = currentCandidateRatings[i].rating; 
-			sumRatings.push(iRating);
+// 	response.header("Access-Control-Allow-Origin", "*");
+//   	response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
-		}
-	let averageRating = sumRatings.reduce((a,b) => a + b, 0) / currentCandidateRatings.length; 
+// 	// edit this so we're returning json, not messages. 
+// 	let content = "Vote submitted.";
+// 	// response.send(content);
+// 	response.json({id: candidateID, Name: canNames[candidateID], Time: Date.now(), Rating: newRating});
+// 	response.end();
 
-	response.header("Access-Control-Allow-Origin", "*");
-  	response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+// }
 
-	let content = averageRating.toString();
-	// response.send(content);
-	response.json({Name: canNames[candidateID], Average: content})
-	response.end();
+function upvote(request, response) {
 
-}
-
-
-function vote(request, response) {
-
-	let candidateID = request.params.num;
-	let newRating = parseInt(request.params.vote); 
-
-		// need to implement some logic to ensure that ratings are not below 0 or above 5
-
+	let candidateID = request.params.canID;
 	currentCandidateRatings = allCandidates[candidateID]; 
 
-	let newVote = {id: candidateID, name: canNames[candidateID], time: Date.now(), rating: newRating};
+	let newVote = {id: candidateID, name: canNames[candidateID], time: Date.now(), rating: 1};
 	currentCandidateRatings.push(newVote);
 
 	response.header("Access-Control-Allow-Origin", "*");
   	response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
-	// edit this so we're returning json, not messages. 
-	let content = "Vote submitted.";
-	// response.send(content);
-	response.json({id: candidateID, Name: canNames[candidateID], Time: Date.now(), Rating: newRating});
+	response.json({id: candidateID, name: canNames[candidateID], time: Date.now(), rating: 1});
 	response.end();
 
 }
 
-function candidateHistory(request, response) {
+function downvote(request, response) {
 
-	// average vote for X duration of time. Votes are all timestamped, so can be regrouped by minute, 2-minute, 15-min intervals, hour, etc. 
-	// the interval can may be specified by a param
-	// this should return json in which each time interval has an average rating assocaited with it
+	let candidateID = request.params.canID;
+	currentCandidateRatings = allCandidates[candidateID]; 
 
-}
-
-function defaultContent(request, response){
-
-	let content = "This is the default content.";
+	let newVote = {id: candidateID, name: canNames[candidateID], time: Date.now(), rating: -1};
+	currentCandidateRatings.push(newVote);
 
 	response.header("Access-Control-Allow-Origin", "*");
   	response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
-	response.send(content);
+	response.json({id: candidateID, name: canNames[candidateID], time: Date.now(), rating: -1});
 	response.end();
 
 }
+
 
 function lookupCandidates(request, response){
 
@@ -156,66 +154,71 @@ function lookupVotesByCandidate(request, response){
 	response.end();
 }
 
-function upvote(request, response) {
+function candidateAverageRating(request, response){
 
-	let candidateID = request.params.canID;
+	let candidateID = request.params.num;
 
-		// need to implement some logic to ensure that ratings are not below 0 or above 5
+	let currentCandidateRatings = allCandidates[candidateID]; // this is a list! 
 
-	currentCandidateRatings = allCandidates[candidateID]; 
+	let sumRatings = []; 
 
-	let newVote = {id: candidateID, name: canNames[candidateID], time: Date.now(), rating: 1};
-	currentCandidateRatings.push(newVote);
+		for (i=0; i < currentCandidateRatings.length; i++) {
 
-	response.header("Access-Control-Allow-Origin", "*");
-  	response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+			let iRating = currentCandidateRatings[i].rating; 
+			sumRatings.push(iRating);
 
-	// edit this so we're returning json, not messages. 
-	let content = "Vote submitted.";
-	// response.send(content);
-	response.json({id: candidateID, name: canNames[candidateID], time: Date.now(), rating: 1});
-	response.end();
-
-}
-
-function downvote(request, response) {
-
-	let candidateID = request.params.canID;
-
-		// need to implement some logic to ensure that ratings are not below 0 or above 5
-
-	currentCandidateRatings = allCandidates[candidateID]; 
-
-	let newVote = {id: candidateID, name: canNames[candidateID], time: Date.now(), rating: -1};
-	currentCandidateRatings.push(newVote);
+		}
+	let averageRating = sumRatings.reduce((a,b) => a + b, 0) / currentCandidateRatings.length; 
 
 	response.header("Access-Control-Allow-Origin", "*");
   	response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
-	// edit this so we're returning json, not messages. 
-	let content = "Vote submitted.";
+	let content = averageRating.toString();
 	// response.send(content);
-	response.json({id: candidateID, name: canNames[candidateID], time: Date.now(), rating: -1});
+	response.json({id: candidateID, name: canNames[candidateID], Average: content})
 	response.end();
 
 }
 
-// start the server:
+function candidateTotalRating(request, response){
+
+	let candidateID = request.params.num;
+
+	let currentCandidateRatings = allCandidates[candidateID]; // this is a list! 
+
+	let sumRatings = []; 
+
+		for (i=0; i < currentCandidateRatings.length; i++) {
+
+			let iRating = currentCandidateRatings[i].rating; 
+			sumRatings.push(iRating);
+
+		}
+	let totalRating = sumRatings.reduce((a,b) => a + b, 0);
+
+	response.header("Access-Control-Allow-Origin", "*");
+  	response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+
+	response.json({id: candidateID, name: canNames[candidateID], total: totalRating})
+	response.end();
+
+}
+
+
 server.listen(8080, serverStart);
 
-server.get('/default', defaultContent); // returns candidate ID #
+server.get('/default', defaultContent); 
+server.get('/candidate/new/:name', newCandidate); // returns candidate ID #
+
+server.get('/upvote/:canID/', upvote);
+server.get('/downvote/:canID/', downvote);
 
 server.get('/candidate/all/', lookupCandidates); 
 server.get('/votes/all/', lookupVotes); 
 
-server.get('/candidate/new/:name', newCandidate); // returns candidate ID #
-
-server.get('/candidate/:num/average', candidateRating); // returns average votes for a given candidate
-server.get('/candidate/:num/total', candidateRating); // return total of up & downvotes for a given candidate
-
 server.get('/candidate/:num/allvotes', lookupVotesByCandidate); // returns all votes for a given candidate
-server.get('/candidate/:num/vote/:vote', vote); // submits new rating/vote, 1-5 "stars" or "points" or w/e
+// server.get('/candidate/:num/vote/:vote', vote); // submits new rating/vote, 1-5 "stars" or "points" or w/e
 
-server.get('/upvote/:canID/', upvote);
-server.get('/downvote/:canID/', downvote);
-// server.get('/candidate/:num/history', candidateHistory); 
+server.get('/candidate/:num/average', candidateAverageRating); // returns average votes for a given candidate
+server.get('/candidate/:num/total', candidateTotalRating); // return total of up & downvotes for a given candidate
+

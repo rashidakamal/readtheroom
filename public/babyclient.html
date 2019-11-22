@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="/style.css">
     
     <!-- import the webpage's javascript file -->
-    <script src="../client.js" defer></script>
+    <script src="client.js" defer></script>
   </head>  
 <body>
 
@@ -18,11 +18,11 @@
 Results will be returned by console. <br>
    Enter the name of the candidate you'd like to add: <input id="addCandidateInput" type="text" value=""><button id="addCandidateButton">Add a candidate!</button>
 <br><br>
-    Look up candidate (by ID): <input id="lookupCandidateInput" type="text" value=""><button id="lookupCandidateButton">Check current rating!</button>
+    Look up candidate (by ID): <input id="lookupCandidateInput" type="text" value=""><button id="lookupCandidateAverageButton">Check average!</button> <button id="lookupCandidateTotalButton">Check total!</button>
     <br><br>
-    Vote for candidate: <input id="voteForCandidateInput" type="text" value="">
+    Vote for candidate: 
 
-        <select id="ratings">
+        <select id="voteForCandidateInput">
             <option value="0">0</option>
             <option value="1">1</option>
             <option value="2">2</option>
@@ -30,6 +30,7 @@ Results will be returned by console. <br>
             <option value="4">4</option>
             <option value="5">5</option>
         </select>
-    <button id="voteForCandidateButton">Vote for candidate!</button>
+    <button id="upvoteForCandidateButton">Upvote (+1)</button>
+    <button id="downvoteForCandidateButton">Downvote (-1)</button>
 
 </body>
