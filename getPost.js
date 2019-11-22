@@ -88,7 +88,7 @@ function vote(request, response) {
 
 	currentCandidateRatings = allCandidates[candidateID]; 
 
-	let newVote = {time: Date.now(), rating: newRating};
+	let newVote = {id: candidateID, name: canNames[candidateID], time: Date.now(), rating: newRating};
 	currentCandidateRatings.push(newVote);
 
 	response.header("Access-Control-Allow-Origin", "*");
@@ -97,7 +97,7 @@ function vote(request, response) {
 	// edit this so we're returning json, not messages. 
 	let content = "Vote submitted.";
 	// response.send(content);
-	response.json({Name: canNames[candidateID], Time: Date.now(), Rating: newRating});
+	response.json({id: candidateID, Name: canNames[candidateID], Time: Date.now(), Rating: newRating});
 	response.end();
 
 }
@@ -121,12 +121,54 @@ function defaultContent(request, response){
 	response.end();
 
 }
+
+function lookupCandidates(request, response){
+
+	let content = canNames; 
+	response.header("Access-Control-Allow-Origin", "*");
+	response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+	  
+	response.send(content);
+	response.end();
+
+}
+
+function lookupVotes(request, response){
+
+	let content = allCandidates; 
+	response.header("Access-Control-Allow-Origin", "*");
+	response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+	  
+	response.send(content);
+	response.end();
+
+}
+
+function lookupVotesByCandidate(request, response){
+
+	let canID = request.params.num; 
+	let content = allCandidates[canID];
+
+	response.header("Access-Control-Allow-Origin", "*");
+	response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+	  
+	response.send(content);
+	response.end();
+}
+
 // start the server:
 server.listen(8080, serverStart);
 
 server.get('/default', defaultContent); // returns candidate ID #
 
+server.get('/candidate/all/', lookupCandidates); 
+server.get('/votes/all/', lookupVotes); 
+
 server.get('/candidate/new/:name', newCandidate); // returns candidate ID #
-server.get('/candidate/:num/', candidateRating); // returns current rating of candidate
+
+server.get('/candidate/:num/average', candidateRating); // returns current rating of candidate
+server.get('/candidate/:num/total', candidateRating);
+
+server.get('/candidate/:num/allvotes', lookupVotesByCandidate); 
 server.get('/candidate/:num/vote/:vote', vote); // submits new rating/vote, 1-5 "stars" or "points" or w/e
 // server.get('/candidate/:num/history', candidateHistory); 

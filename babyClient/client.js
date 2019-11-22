@@ -25,7 +25,7 @@ lookupCandidateButton.onclick = function() {
 
     let candidateID = document.getElementById("lookupCandidateInput").value;
 
-    let updatedEndpoint = 'http://localhost:8080/candidate/' + candidateID + "/"; 
+    let updatedEndpoint = 'http://localhost:8080/candidate/' + candidateID + "/average"; 
     getStuff(updatedEndpoint);
     
 }
