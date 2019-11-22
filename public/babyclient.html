@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Hello!</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- import the webpage's stylesheet -->
+    <link rel="stylesheet" href="/style.css">
+    
+    <!-- import the webpage's javascript file -->
+    <script src="../client.js" defer></script>
+  </head>  
+<body>
+
+<h1>Read the Room, Baby Client</h1>
+Results will be returned by console. <br>
+   Enter the name of the candidate you'd like to add: <input id="addCandidateInput" type="text" value=""><button id="addCandidateButton">Add a candidate!</button>
+<br><br>
+    Look up candidate (by ID): <input id="lookupCandidateInput" type="text" value=""><button id="lookupCandidateButton">Check current rating!</button>
+    <br><br>
+    Vote for candidate: <input id="voteForCandidateInput" type="text" value="">
+
+        <select id="ratings">
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+    <button id="voteForCandidateButton">Vote for candidate!</button>
+
+</body>

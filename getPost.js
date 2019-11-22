@@ -156,6 +156,50 @@ function lookupVotesByCandidate(request, response){
 	response.end();
 }
 
+function upvote(request, response) {
+
+	let candidateID = request.params.canID;
+
+		// need to implement some logic to ensure that ratings are not below 0 or above 5
+
+	currentCandidateRatings = allCandidates[candidateID]; 
+
+	let newVote = {id: candidateID, name: canNames[candidateID], time: Date.now(), rating: 1};
+	currentCandidateRatings.push(newVote);
+
+	response.header("Access-Control-Allow-Origin", "*");
+  	response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+
+	// edit this so we're returning json, not messages. 
+	let content = "Vote submitted.";
+	// response.send(content);
+	response.json({id: candidateID, name: canNames[candidateID], time: Date.now(), rating: 1});
+	response.end();
+
+}
+
+function downvote(request, response) {
+
+	let candidateID = request.params.canID;
+
+		// need to implement some logic to ensure that ratings are not below 0 or above 5
+
+	currentCandidateRatings = allCandidates[candidateID]; 
+
+	let newVote = {id: candidateID, name: canNames[candidateID], time: Date.now(), rating: -1};
+	currentCandidateRatings.push(newVote);
+
+	response.header("Access-Control-Allow-Origin", "*");
+  	response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+
+	// edit this so we're returning json, not messages. 
+	let content = "Vote submitted.";
+	// response.send(content);
+	response.json({id: candidateID, name: canNames[candidateID], time: Date.now(), rating: -1});
+	response.end();
+
+}
+
 // start the server:
 server.listen(8080, serverStart);
 
@@ -166,9 +210,12 @@ server.get('/votes/all/', lookupVotes);
 
 server.get('/candidate/new/:name', newCandidate); // returns candidate ID #
 
-server.get('/candidate/:num/average', candidateRating); // returns current rating of candidate
-server.get('/candidate/:num/total', candidateRating);
+server.get('/candidate/:num/average', candidateRating); // returns average votes for a given candidate
+server.get('/candidate/:num/total', candidateRating); // return total of up & downvotes for a given candidate
 
-server.get('/candidate/:num/allvotes', lookupVotesByCandidate); 
+server.get('/candidate/:num/allvotes', lookupVotesByCandidate); // returns all votes for a given candidate
 server.get('/candidate/:num/vote/:vote', vote); // submits new rating/vote, 1-5 "stars" or "points" or w/e
+
+server.get('/upvote/:canID/', upvote);
+server.get('/downvote/:canID/', downvote);
 // server.get('/candidate/:num/history', candidateHistory); 
