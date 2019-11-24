@@ -1,7 +1,7 @@
 {
   "name": "ExpressIntro",
   "version": "0.0.3",
-  "start": "node getPost.js",
+  "start": "node app.js",
   "author": {
     "name": "Rashida Kamal"
   },
