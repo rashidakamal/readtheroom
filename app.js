@@ -204,8 +204,8 @@ function candidateTotalRating(request, response){
 
 }
 
-
-server.listen(8080, serverStart);
+const PORT = process.env.PORT || 3000;
+server.listen(PORT, serverStart);
 
 server.get('/', defaultContent);
 server.get('/default', defaultContent); 
