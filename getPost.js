@@ -207,6 +207,7 @@ function candidateTotalRating(request, response){
 
 server.listen(8080, serverStart);
 
+server.get('/', defaultContent);
 server.get('/default', defaultContent); 
 server.get('/candidate/new/:name', newCandidate); // returns candidate ID #
 
