@@ -22,14 +22,14 @@ addNewCandidateButton.onclick = function() {
 
     let candidateName = document.getElementById("addCandidateInput").value;
     console.log(candidateName);
-    let updatedEndpoint = 'http://localhost:8080/candidate/new/' + candidateName; 
+    let updatedEndpoint = 'https://debate-room.herokuapp.com/candidate/new/' + candidateName; 
     getStuff(updatedEndpoint);
 }
 
 lookupCandidateButton.onclick = function() {
 
     let candidateID = document.getElementById("lookupCandidateInput").value;
-    let updatedEndpoint = 'http://localhost:8080/candidate/' + candidateID + "/average"; 
+    let updatedEndpoint = 'https://debate-room.herokuapp.com/candidate/' + candidateID + "/average"; 
     getStuff(updatedEndpoint);
     
 }
@@ -37,7 +37,7 @@ lookupCandidateButton.onclick = function() {
 lookupCandidateTotalButton.onclick = function() {
 
     let candidateID = document.getElementById("lookupCandidateInput").value;
-    let updatedEndpoint = 'http://localhost:8080/candidate/' + candidateID + "/total"; 
+    let updatedEndpoint = 'https://debate-room.herokuapp.com/candidate/' + candidateID + "/total"; 
     getStuff(updatedEndpoint);
     
 }
@@ -47,7 +47,7 @@ newUpvoteButton.onclick = function(){
     let candidates = document.getElementById("voteForCandidateInput");
     let getChoice = candidates.options[candidates.selectedIndex].value;
 
-    let updatedEndpoint = 'http://localhost:8080/upvote/' + getChoice + "/"; 
+    let updatedEndpoint = 'https://debate-room.herokuapp.com/upvote/' + getChoice + "/"; 
     getStuff(updatedEndpoint);
 
 }
@@ -57,7 +57,7 @@ newDownvoteButton.onclick = function(){
     let candidates = document.getElementById("voteForCandidateInput");
     let getChoice = candidates.options[candidates.selectedIndex].value;
 
-    let updatedEndpoint = 'http://localhost:8080/downvote/' + getChoice + "/"; 
+    let updatedEndpoint = 'https://debate-room.herokuapp.com/downvote/' + getChoice + "/"; 
     getStuff(updatedEndpoint);
 
 }
