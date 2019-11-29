@@ -80,43 +80,22 @@ function newCandidate(request, response){
 
 function newVoter(request, response){
 
-	let voterID = request.params.UUID;
+	// let voterID = request.params.UUID;
 	// let voterAgent = request.headers.user-agent;
 
-	let voter = {UUID: voterID, userAgent: voterAgent};
+	// let voter = {UUID: voterID, userAgent: voterAgent};
 	
-	voters.push(voter);
+	// voters.push(voter);
 
 	response.header("Access-Control-Allow-Origin", "*");
   	response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
-	let content = "Voter ID " + UUID + "has been added to the system.";
+	let content = "Hello Rashida so sad.";
 	response.send(content);
 	response.end();
 
 }
 
-// function vote(request, response) {
-
-// 	let candidateID = request.params.num;
-// 	let newRating = parseInt(request.params.vote); 
-
-// 		// need to implement some logic to ensure that ratings are not below 0 or above 5
-
-// 	currentCandidateRatings = allCandidates[candidateID]; 
-
-// 	let newVote = {id: candidateID, name: canNames[candidateID], time: Date.now(), rating: newRating};
-// 	currentCandidateRatings.push(newVote);
-// 	response.header("Access-Control-Allow-Origin", "*");
-//   	response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-
-// 	// edit this so we're returning json, not messages. 
-// 	let content = "Vote submitted.";
-// 	// response.send(content);
-// 	response.json({id: candidateID, Name: canNames[candidateID], Time: Date.now(), Rating: newRating});
-// 	response.end();
-
-// }
 
 function upvote(request, response) {
 
