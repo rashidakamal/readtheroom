@@ -69,7 +69,7 @@ function newCandidate(request, response){
 function newVoter(request, response){
 
 	let voterID = request.params.UUID;
-	let voterAgent = request.headers.user-agent;
+	// let voterAgent = request.headers.user-agent;
 
 	let voter = {UUID: voterID, userAgent: voterAgent};
 	
@@ -250,7 +250,7 @@ server.get('/', defaultContent);
 server.get('/default', defaultContent); 
 server.get('/candidate/new/:name', newCandidate); // returns candidate ID #
 
-server.get('/voter/new/:UUID', newVoter); // returns candidate ID #
+server.get('/voter/new/:UUID', newVoter); 
 
 
 server.get('/:UUID/upvote/:canID/', upvote);
