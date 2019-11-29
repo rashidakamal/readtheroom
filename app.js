@@ -16,7 +16,7 @@
 let allCandidates = [];  // this will become a list of lists! 
 let canNames = [];
 
-let votes = []; 
+let voters = []; 
 
 const express = require('express');			    // include express.js
 const server = express();						        // a local instance of it
@@ -66,6 +66,24 @@ function newCandidate(request, response){
 
 }
 
+function newVoter(request, response){
+
+	let voterID = request.params.UUID;
+	let voterAgent = request.headers.user-agent;
+
+	let voter = {UUID: voterID, userAgent: voterAgent};
+	
+	voters.push(voter);
+
+	response.header("Access-Control-Allow-Origin", "*");
+  	response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+
+	let content = "Voter ID " + UUID + "has been added to the system.";
+	response.send(content);
+	response.end();
+
+}
+
 // function vote(request, response) {
 
 // 	let candidateID = request.params.num;
@@ -77,7 +95,6 @@ function newCandidate(request, response){
 
 // 	let newVote = {id: candidateID, name: canNames[candidateID], time: Date.now(), rating: newRating};
 // 	currentCandidateRatings.push(newVote);
-
 // 	response.header("Access-Control-Allow-Origin", "*");
 //   	response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
@@ -91,17 +108,12 @@ function newCandidate(request, response){
 
 function upvote(request, response) {
 
-	console.log("saw a upvote");
-
 	let candidateID = request.params.canID;
-	let voter_info = request.headers.user-agent;
-
-	console.log("voter info"); 
-	console.log(voter_info);
+	let voterID = request.params.UUID;
 
 	currentCandidateRatings = allCandidates[candidateID]; 
 
-	let newVote = {id: candidateID, name: canNames[candidateID], time: Date.now(), rating: 1};
+	let newVote = {id: candidateID, name: canNames[candidateID], time: Date.now(), rating: 1, voter: voterID};
 	currentCandidateRatings.push(newVote);
 
 	response.header("Access-Control-Allow-Origin", "*");
@@ -115,16 +127,12 @@ function upvote(request, response) {
 
 function downvote(request, response) {
 
-	console.log("saw a downvote");
-	let voter_info = request.headers;
-	
-	console.log("voter info"); 
-	console.log(voter_info);
-
 	let candidateID = request.params.canID;
+	let voterID = request.params.UUID;
+
 	currentCandidateRatings = allCandidates[candidateID]; 
 
-	let newVote = {id: candidateID, name: canNames[candidateID], time: Date.now(), rating: -1};
+	let newVote = {id: candidateID, name: canNames[candidateID], time: Date.now(), rating: -1, voter: voterID};
 	currentCandidateRatings.push(newVote);
 
 	response.header("Access-Control-Allow-Origin", "*");
@@ -241,6 +249,9 @@ server.listen(PORT, serverStart);
 server.get('/', defaultContent);
 server.get('/default', defaultContent); 
 server.get('/candidate/new/:name', newCandidate); // returns candidate ID #
+
+server.get('/voter/new/:UUID/', newVoter); // returns candidate ID #
+
 
 server.get('/:UUID/upvote/:canID/', upvote);
 server.get('/:UUID/downvote/:canID/', downvote);
