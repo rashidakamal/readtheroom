@@ -2,9 +2,31 @@
 
 **Restful API for ITP Understanding Networks**
 
-Get started with `npm install`, and then `node getPost.js` to start the server. 
-Separately, `cd` into `babyClient/` and run a simpleHTTPServer with the tools of your choice. 
+Get started with `npm install`, and then `node getPost.js` to start the server.
+Separately, `cd` into `babyClient/` and run a simpleHTTPServer with the tools of your choice.
 
-You can also just curl your served endpoints, and ignore babyClient altogether. 
+You can also just curl your served endpoints, and ignore babyClient altogether.
 
 Right now, the server just returns unhelpful text responses, but babyClient will allow you to see the console log, where all the magic is happening. Eventually, we should have the server respond with json or something else that might be helpful to the physical interface (LED sentiment meter for each candidate??).
+
+——
+
+Read the Room is an interface for measuring and displaying group sentiment across a set of candidates. Read the Room was designed specifically for a small to medium sized debate party that would allow tracking of voter sentiment throughout the debate. The host adds candidates to the interface ahead of time (host client?). Each voter is allowed to upvote or downvote a candidate by one point with all candidates starting at 0. The display client will show all candidates current score with a ticker (similar to a stock markets) that is either up (green) or down (red). The color and ticker will depend on how the candidates score has changed from its previous state (has it gone up or down). This allows the audience to understand the performance of each candidate in real time (if they are red or green) and their sentiment over time during a debate (total candidate score).
+
+Questions we kept in mind when building Read the Room:
+How much spontaneity is appropriate?
+How much change does the user need to see?
+How should we account for outliers in voters?
+Should voting be subtle? How visible should it be?
+
+We wanted to allow for spontaneity in voting, allowing voters more than one vote per candidate.  During a debate, if a candidate says something that a voter either resonates with or doesn’t, they should be allowed to up or down vote that candidate. Thus Read the Room tracks voter sentiment of candidates across a debate.
+
+We reduced change in candidate score to a simple color and ticker. We felt having a chart showing total change over time would be too noisy to the viewer and distract them from understanding the current sentiment (since spontaneity in voting was what we wanted to prioritize).
+
+We felt the need to allow outliers (voters that have voted more than others and thus have affected the candidate score the most) in Read the Room because our goal is sentiment measurement and outliers reflect strong voter sentiments, we didn’t want to dampen extreme reactions. Therefore we don’t limit the amount of votes per voter. In order to account for outliers, we wanted to make their contribution visible by showing top voters (voters who voted the most) per each candidate. This acknowledges the outliers and makes voters aware that all voters may not be contributing equally by displaying a certain amount of transparency.
+
+
+Endpoints:
+addCandidateButton  —> Adds a new candidate by name
+lookupCandidateButton —> Returns total candidate score
+voteForCandidateButton —> Adds new vote to candidate (up or down by 1 vote to total score)
