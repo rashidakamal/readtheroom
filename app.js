@@ -80,12 +80,11 @@ function newCandidate(request, response){
 
 function newVoter(request, response){
 
-	// let voterID = request.params.UUID;
+	let voterInfo = request.params.UUID;
 	// let voterAgent = request.headers.user-agent;
 
-	// let voter = {UUID: voterID, userAgent: voterAgent};
-	
-	// voters.push(voter);
+	let voter = {UUID: voterInfo};
+	voters.push(voter);
 
 	response.header("Access-Control-Allow-Origin", "*");
   	response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
