@@ -81,7 +81,6 @@ function newCandidate(request, response){
 function newVoter(request, response){
 
 	let voterInfo = request.params.UUID;
-	// let voterAgent = request.headers.user-agent;
 
 	let voter = {UUID: voterInfo};
 	voters.push(voter);
@@ -109,8 +108,7 @@ function upvote(request, response) {
 	response.header("Access-Control-Allow-Origin", "*");
   	response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
-	// response.json({id: candidateID, name: canNames[candidateID], time: Date.now(), rating: 1});
-	response.send(voter_info);
+	response.json({id: candidateID, name: canNames[candidateID], time: Date.now(), rating: 1, voter: voterID});
 	response.end();
 
 }
@@ -128,8 +126,7 @@ function downvote(request, response) {
 	response.header("Access-Control-Allow-Origin", "*");
   	response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
-	// response.json({id: candidateID, name: canNames[candidateID], time: Date.now(), rating: -1});
-	response.send(voter_info);
+	response.json({id: candidateID, name: canNames[candidateID], time: Date.now(), rating: -1, voter: voterID});
 	response.end();
 
 }
