@@ -46,6 +46,18 @@ function defaultContent(request, response){
 
 }
 
+function testContent(request, response){
+
+	let content = "This is the test content.";
+
+	response.header("Access-Control-Allow-Origin", "*");
+  	response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+
+	response.send(content);
+	response.end();
+
+}
+
 function newCandidate(request, response){
 
 	let candidateName = request.params.name;
@@ -248,7 +260,9 @@ server.listen(PORT, serverStart);
 
 server.get('/', defaultContent);
 server.get('/default', defaultContent); 
-server.get('/candidate/new/:name', newCandidate); // returns candidate ID #
+server.get('/candidate/new/:name', newCandidate); 
+
+server.get('/test', testContent); 
 
 server.get('/voter/new/:UUID', newVoter); 
 
