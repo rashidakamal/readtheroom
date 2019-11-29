@@ -14,7 +14,9 @@
 */
 
 let allCandidates = [];  // this will become a list of lists! 
-let canNames = []
+let canNames = [];
+
+let votes = []; 
 
 const express = require('express');			    // include express.js
 const server = express();						        // a local instance of it
@@ -92,7 +94,7 @@ function upvote(request, response) {
 	console.log("saw a upvote");
 
 	let candidateID = request.params.canID;
-	let voter_info = request.headers;
+	let voter_info = request.headers.user-agent;
 
 	console.log("voter info"); 
 	console.log(voter_info);
@@ -240,8 +242,8 @@ server.get('/', defaultContent);
 server.get('/default', defaultContent); 
 server.get('/candidate/new/:name', newCandidate); // returns candidate ID #
 
-server.get('/upvote/:canID/', upvote);
-server.get('/downvote/:canID/', downvote);
+server.get('/:UUID/upvote/:canID/', upvote);
+server.get('/:UUID/downvote/:canID/', downvote);
 
 server.get('/candidate/all/', lookupCandidates); 
 server.get('/votes/all/', lookupVotes); 
