@@ -95,7 +95,6 @@ function newVoter(request, response){
 
 // 	let newVote = {id: candidateID, name: canNames[candidateID], time: Date.now(), rating: newRating};
 // 	currentCandidateRatings.push(newVote);
-
 // 	response.header("Access-Control-Allow-Origin", "*");
 //   	response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
