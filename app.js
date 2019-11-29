@@ -89,8 +89,11 @@ function newCandidate(request, response){
 
 function upvote(request, response) {
 
+	console.log("saw a upvote");
+
 	let candidateID = request.params.canID;
 	let voter_info = request.headers;
+
 	console.log("voter info"); 
 	console.log(voter_info);
 
@@ -108,6 +111,12 @@ function upvote(request, response) {
 }
 
 function downvote(request, response) {
+
+	console.log("saw a downvote");
+	let voter_info = request.headers;
+	
+	console.log("voter info"); 
+	console.log(voter_info);
 
 	let candidateID = request.params.canID;
 	currentCandidateRatings = allCandidates[candidateID]; 
