@@ -1,11 +1,13 @@
 const UUID = (Math.floor(Math.random() * 1000)); 
 console.log(UUID);
 
+let test = "testVoter"
 let newUpvoteButton = document.getElementById("upvoteForCandidateButton");
 let newDownvoteButton = document.getElementById("downvoteForCandidateButton");
 
 async function getStuff(endpoint) {
 
+    console.log("in getStuff");
     console.log(endpoint);
     const response = await fetch(endpoint);
     const data = await response.text();
@@ -13,7 +15,7 @@ async function getStuff(endpoint) {
 
 }
 
-let voterEndpoint = 'https://debate-room.herokuapp.com/voter/new/' + UUID; 
+let voterEndpoint = 'https://debate-room.herokuapp.com/voter/new/' + test; 
 getStuff(voterEndpoint);
 
 newUpvoteButton.onclick = function(){
