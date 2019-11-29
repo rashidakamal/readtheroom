@@ -250,7 +250,7 @@ server.get('/', defaultContent);
 server.get('/default', defaultContent); 
 server.get('/candidate/new/:name', newCandidate); // returns candidate ID #
 
-server.get('/voter/new/:UUID/', newVoter); // returns candidate ID #
+server.get('/voter/new/:UUID', newVoter); // returns candidate ID #
 
 
 server.get('/:UUID/upvote/:canID/', upvote);
