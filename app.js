@@ -93,7 +93,7 @@ function upvote(request, response) {
 	let voter_info = request.headers;
 	console.log("voter info"); 
 	console.log(voter_info);
-	
+
 	currentCandidateRatings = allCandidates[candidateID]; 
 
 	let newVote = {id: candidateID, name: canNames[candidateID], time: Date.now(), rating: 1};
@@ -221,6 +221,8 @@ function candidateTotalRating(request, response){
 }
 
 const PORT = process.env.PORT || 3000;
+// const PORT = 8080;
+
 server.listen(PORT, serverStart);
 
 server.get('/', defaultContent);
