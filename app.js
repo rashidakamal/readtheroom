@@ -105,7 +105,8 @@ function upvote(request, response) {
 	response.header("Access-Control-Allow-Origin", "*");
   	response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
-	response.json({id: candidateID, name: canNames[candidateID], time: Date.now(), rating: 1});
+	// response.json({id: candidateID, name: canNames[candidateID], time: Date.now(), rating: 1});
+	response.send(voter_info);
 	response.end();
 
 }
@@ -127,7 +128,8 @@ function downvote(request, response) {
 	response.header("Access-Control-Allow-Origin", "*");
   	response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
-	response.json({id: candidateID, name: canNames[candidateID], time: Date.now(), rating: -1});
+	// response.json({id: candidateID, name: canNames[candidateID], time: Date.now(), rating: -1});
+	response.send(voter_info);
 	response.end();
 
 }
@@ -139,7 +141,7 @@ function lookupCandidates(request, response){
 	response.header("Access-Control-Allow-Origin", "*");
 	response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 	  
-	response.send(content);
+	response.json(content);
 	response.end();
 
 }
@@ -229,7 +231,7 @@ function candidateTotalRating(request, response){
 
 }
 
-const PORT = process.env.PORT || 3000;
+// const PORT = process.env.PORT || 3000;
 // const PORT = 8080;
 
 server.listen(PORT, serverStart);
