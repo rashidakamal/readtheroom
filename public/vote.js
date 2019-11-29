@@ -13,6 +13,9 @@ async function getStuff(endpoint) {
 
 }
 
+let voterEndpoint = 'https://debate-room.herokuapp.com/voter/new/' + UUID + "/"; 
+getStuff(voterEndpoint);
+
 newUpvoteButton.onclick = function(){
 
     let candidates = document.getElementById("voteForCandidateInput");
