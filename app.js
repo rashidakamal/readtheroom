@@ -90,6 +90,10 @@ function newCandidate(request, response){
 function upvote(request, response) {
 
 	let candidateID = request.params.canID;
+	let voter_info = request.headers;
+	console.log("voter info"); 
+	console.log(voter_info);
+	
 	currentCandidateRatings = allCandidates[candidateID]; 
 
 	let newVote = {id: candidateID, name: canNames[candidateID], time: Date.now(), rating: 1};
@@ -132,6 +136,18 @@ function lookupCandidates(request, response){
 }
 
 function lookupVotes(request, response){
+
+	let content = allCandidates; 
+	response.header("Access-Control-Allow-Origin", "*");
+	response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+	  
+	response.send(content);
+	response.end();
+
+}
+
+// implement overall vote total ... 
+function voteTotals(request, response){
 
 	let content = allCandidates; 
 	response.header("Access-Control-Allow-Origin", "*");
