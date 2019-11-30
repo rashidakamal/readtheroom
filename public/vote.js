@@ -18,22 +18,24 @@ async function getStuff(endpoint) {
 let voterEndpoint = 'https://debate-room.herokuapp.com/voter/new/' + UUID; 
 getStuff(voterEndpoint);
 
-newUpvoteButton.onclick = function(){
+newUpvoteButton.onclick = function(e){
 
-    let candidates = document.getElementById("voteForCandidateInput");
-    let getChoice = candidates.options[candidates.selectedIndex].value;
+    let getChoice = e.target.parentNode.id; 
+    // let candidates = document.getElementById("voteForCandidateInput");
+    console.log(e.target.parentNode);
 
-    console.log(UUID);
     let updatedEndpoint = 'https://debate-room.herokuapp.com/' + UUID + '/upvote/' + getChoice + "/"; 
     getStuff(updatedEndpoint);
 
 }
 
-newDownvoteButton.onclick = function(){
+newDownvoteButton.onclick = function(e){
 
-    let candidates = document.getElementById("voteForCandidateInput");
-    let getChoice = candidates.options[candidates.selectedIndex].value;
-    console.log(UUID); 
+    let getChoice = e.target.parentNode.id; 
+    // let candidates = document.getElementById("voteForCandidateInput");
+    console.log(e.target.parentNode);
+
+
     let updatedEndpoint = 'https://debate-room.herokuapp.com/'+ UUID +'/downvote/' + getChoice + "/"; 
     getStuff(updatedEndpoint);
 

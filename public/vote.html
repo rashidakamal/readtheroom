@@ -10,26 +10,85 @@
     <link rel="stylesheet" href="/style.css">
     
     <!-- import the webpage's javascript file -->
-    <script src="vote.js" defer></script>
+    <!-- <script src="vote.js" defer></script> -->
     <script>
+
+        const UUID = (Math.floor(Math.random() * 1000)); 
+
+        async function getStuff(endpoint) {
+
+            console.log("in getStuff");
+            console.log(endpoint);
+            const response = await fetch(endpoint);
+            const data = await response.text();
+            console.log(data);
+
+        }
+
+        let voterEndpoint = 'https://debate-room.herokuapp.com/voter/new/' + UUID; 
+        getStuff(voterEndpoint);
     
-        // console.log(Math.random() * 1000);
+        function goUPVOTE(e){
+
+            let getChoice = e.value; 
+            console.log(e.value);
+
+            let updatedEndpoint = 'https://debate-room.herokuapp.com/' + UUID + '/upvote/' + getChoice + "/"; 
+            getStuff(updatedEndpoint);
+
+            }
+
+        function goDOWNVOTE(e){
+
+            let getChoice = e.value; 
+            console.log(e.value);
+
+            let updatedEndpoint = 'https://debate-room.herokuapp.com/' + UUID + '/downvote/' + getChoice + "/"; 
+            getStuff(updatedEndpoint);
+
+        }
 
     </script>
   </head>  
 <body>
+<center>
 
-Vote for candidate: 
+<h1>SUBMIT YOUR VOTE!</h1>
+        <div id="0">
 
-        <select id="voteForCandidateInput">
+            <H2>CANDIDATE 0</H2>
 
-            <option value="0">0</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
+                <button onClick="goUPVOTE(this)" value="0">Upvote (+1)</button>
+                <button onClick="goDOWNVOTE(this)" value="0">Downvote (-1)</button>
 
-        </select>
-    <button id="upvoteForCandidateButton">Upvote (+1)</button>
-    <button id="downvoteForCandidateButton">Downvote (-1)</button>
+        </div>
 
-    </body>
+        <div id="1">
+
+                <H2>CANDIDATE 1</H2>
+
+                <button onClick="goUPVOTE(this)" value="1">Upvote (+1)</button>
+                <button onClick="goDOWNVOTE(this)" value="1">Downvote (-1)</button>
+                
+        </div>
+
+        <div id="2">
+
+                <H2>CANDIDATE 2</H2>
+
+                <button onClick="goUPVOTE(this)" value="2">Upvote (+1)</button>
+                <button onClick="goDOWNVOTE(this)" value="2">Downvote (-1)</button>
+                
+        </div>
+
+        <div id="3">
+
+                    <H2>CANDIDATE 3</H2>
+
+                <button onClick="goUPVOTE(this)" value="3">Upvote (+1)</button>
+                <button onClick="goDOWNVOTE(this)" value="3">Downvote (-1)</button>
+                
+        </div>
+
+    </center>
+</body>

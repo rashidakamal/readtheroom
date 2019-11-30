@@ -228,16 +228,13 @@ function candidateTotalRating(request, response){
 
 }
 
-const PORT = process.env.PORT || 3000;
-// const PORT = 8080;
+// const PORT = process.env.PORT || 3000;
+const PORT = 8080;
 
 server.listen(PORT, serverStart);
 
 server.get('/', defaultContent);
-server.get('/default', defaultContent); 
 server.get('/candidate/new/:name', newCandidate); 
-
-server.get('/test', testContent); 
 
 server.get('/voter/new/:UUID', newVoter); 
 
