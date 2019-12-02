@@ -9,10 +9,11 @@ async function getStuff(endpoint) {
 }
   candidates = [Trump, Bernie, Warren, Yang];
 
-   (for i = 0; i <= candiates.length; i++) {
+   for (i = 0; i <= candiates.length; i++) {
       let choice = candiates[i];
 
       console.log(candidates);
       let updatedEndpoint = 'https://debate-room.herokuapp.com/candidate/new/' + choice;
       getStuff(updatedEndpoint);
+      
     }
