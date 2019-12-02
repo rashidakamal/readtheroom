@@ -30,3 +30,11 @@ h1 {
     padding: .25rem;
     font-size: 12px;
   }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+  }
+  canvas {
+    display: block;
+  }
