@@ -73,7 +73,7 @@ function newCandidate(request, response){
 	response.header("Access-Control-Allow-Origin", "*");
   	response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
-	response.json({Name: candidateName, ID: candidateID})
+	response.json({Name: candidateName, ID: candidateID});
 	response.end();
 
 }
@@ -223,7 +223,7 @@ function candidateTotalRating(request, response){
 	response.header("Access-Control-Allow-Origin", "*");
   	response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
-	response.json({id: candidateID, name: canNames[candidateID], total: totalRating})
+	response.json({id: candidateID, name: canNames[candidateID], total: totalRating});
 	response.end();
 
 }
