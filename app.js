@@ -228,6 +228,34 @@ function candidateTotalRating(request, response){
 
 }
 
+function votesReset(request, response){
+
+	for (i=0; i < allCandidates.length; i++){
+		allCandidates[i] = []; 
+	}   
+
+	voters = []; 
+
+	response.header("Access-Control-Allow-Origin", "*");
+	response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+	  
+	response.send("Votes reset.");
+	response.end();
+}
+
+function candidateReset(request, response){
+
+	allCandidates = [];  // this will become a list of lists! 
+	canNames = []; 
+
+	response.header("Access-Control-Allow-Origin", "*");
+	response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+	  
+	response.send("Candidates reset.");
+	response.end();
+
+}
+
 const PORT = process.env.PORT || 3000;
 // const PORT = 8080;
 
@@ -237,7 +265,6 @@ server.get('/', defaultContent);
 server.get('/candidate/new/:name', newCandidate); 
 
 server.get('/voter/new/:UUID', newVoter); 
-
 
 server.get('/:UUID/upvote/:canID/', upvote);
 server.get('/:UUID/downvote/:canID/', downvote);
@@ -250,4 +277,5 @@ server.get('/candidate/:num/allvotes', lookupVotesByCandidate); // returns all v
 
 // server.get('/candidate/:num/average', candidateAverageRating); // returns average votes for a given candidate
 server.get('/candidate/:num/total', candidateTotalRating); // return total of up & downvotes for a given candidate
-
+server.get('/votes/reset', votesReset);
+server.get('/candidate/reset', candidateReset);
