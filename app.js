@@ -178,31 +178,31 @@ function lookupVotesByCandidate(request, response){
 	response.end();
 }
 
-function candidateAverageRating(request, response){
+// function candidateAverageRating(request, response){
 
-	let candidateID = request.params.num;
+// 	let candidateID = request.params.num;
 
-	let currentCandidateRatings = allCandidates[candidateID]; // this is a list! 
+// 	let currentCandidateRatings = allCandidates[candidateID]; // this is a list! 
 
-	let sumRatings = []; 
+// 	let sumRatings = []; 
 
-		for (i=0; i < currentCandidateRatings.length; i++) {
+// 		for (i=0; i < currentCandidateRatings.length; i++) {
 
-			let iRating = currentCandidateRatings[i].rating; 
-			sumRatings.push(iRating);
+// 			let iRating = currentCandidateRatings[i].rating; 
+// 			sumRatings.push(iRating);
 
-		}
-	let averageRating = sumRatings.reduce((a,b) => a + b, 0) / currentCandidateRatings.length; 
+// 		}
+// 	let averageRating = sumRatings.reduce((a,b) => a + b, 0) / currentCandidateRatings.length; 
 
-	response.header("Access-Control-Allow-Origin", "*");
-  	response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+// 	response.header("Access-Control-Allow-Origin", "*");
+//   	response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
-	let content = averageRating.toString();
-	// response.send(content);
-	response.json({id: candidateID, name: canNames[candidateID], Average: content})
-	response.end();
+// 	let content = averageRating.toString();
+// 	// response.send(content);
+// 	response.json({id: candidateID, name: canNames[candidateID], Average: content})
+// 	response.end();
 
-}
+// }
 
 function candidateTotalRating(request, response){
 
@@ -228,8 +228,8 @@ function candidateTotalRating(request, response){
 
 }
 
-const PORT = process.env.PORT || 3000;
-// const PORT = 8080;
+// const PORT = process.env.PORT || 3000;
+const PORT = 8080;
 
 server.listen(PORT, serverStart);
 
@@ -248,6 +248,6 @@ server.get('/votes/all/', lookupVotes);
 server.get('/candidate/:num/allvotes', lookupVotesByCandidate); // returns all votes for a given candidate
 // server.get('/candidate/:num/vote/:vote', vote); // submits new rating/vote, 1-5 "stars" or "points" or w/e
 
-server.get('/candidate/:num/average', candidateAverageRating); // returns average votes for a given candidate
+// server.get('/candidate/:num/average', candidateAverageRating); // returns average votes for a given candidate
 server.get('/candidate/:num/total', candidateTotalRating); // return total of up & downvotes for a given candidate
 
