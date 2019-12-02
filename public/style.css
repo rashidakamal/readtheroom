@@ -2,7 +2,8 @@
 
 body {
   font-family: 'Chakra Petch', sans-serif;
-  background: rgb(222, 240, 103);
+  /* background: rgb(222, 240, 103); */
+  background: rgb(108, 134, 167);
 }
 
 h1 {
@@ -21,7 +22,8 @@ h1 {
     text-align: left;
     max-height: 300px;
     color: rgb(0, 0, 0);
-    background: rgb(222, 240, 103);
+    background: rgb(108, 134, 167);
+    /* background: rgb(222, 240, 103); */
   }
   
   .box p {
