@@ -7,7 +7,7 @@ async function getStuff(endpoint) {
     console.log(data);
 
 }
-  candidates = [Trump, Bernie, Warren, Yang];
+  candidates = [Biden, Bernie, Warren, Yang];
 
    for (i = 0; i <= candiates.length; i++) {
       let choice = candiates[i];
@@ -15,5 +15,5 @@ async function getStuff(endpoint) {
       console.log(candidates);
       let updatedEndpoint = 'https://debate-room.herokuapp.com/candidate/new/' + choice;
       getStuff(updatedEndpoint);
-      
+
     }

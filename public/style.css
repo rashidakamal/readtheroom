@@ -10,7 +10,6 @@ h1 {
   font-family: 'Chakra Petch', sans-serif;
 }
 
-
 .box.flex {
     display: flex;
     justify-content: center;
@@ -21,7 +20,7 @@ h1 {
   .box {
     text-align: left;
     max-height: 300px;
-    color: rgb(60, 60, 60);
+    color: rgb(0, 0, 0);
     background: rgb(222, 240, 103);
   }
   
@@ -29,5 +28,5 @@ h1 {
     max-width: 350px;
     margin: .25rem;
     padding: .25rem;
-    font-size: 10px;
+    font-size: 12px;
   }
