@@ -4,6 +4,7 @@ var candidateLastTotal = [];
 var candidateTopVotes = [];
 
 
+
 let nameFont;
 let totalFont;
 
@@ -15,8 +16,9 @@ function preload() {
 
 function setup() {
   createCanvas(window.innerWidth, window.innerHeight);
-  lookupCandidate(); //push names into candidateNames
+  // addCandidates();
 
+  lookupCandidate(); //push names into candidateNames
 
   //get number of candidates
   updateLast();
@@ -192,3 +194,26 @@ function sortAllVotes(voteData, candidateID){
 
   // return maxEl;
 }
+
+async function getStuff(endpoint) {
+
+  console.log(endpoint);
+  const response = await fetch(endpoint);
+  const data = await response.text();
+  console.log(data);
+}
+
+function addCandidates(){
+  let candidates = ["Biden", "Bernie", "Warren", "Yang"];
+
+  for (i = 0; i <= candidates.length; i++) {
+     let choice = candidates[i];
+ 
+     console.log(candidates);
+     let updatedEndpoint = 'https://debate-room.herokuapp.com/candidate/new/' + choice;
+     getStuff(updatedEndpoint);
+     
+   }
+   console.log('candidates added')
+}
+
