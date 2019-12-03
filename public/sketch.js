@@ -216,9 +216,9 @@ async function getStuff(endpoint) {
 //    console.log('candidates added')
 // }
 
-function keyPressed(){
+function keyTyped(){
 
-  if(keyCode == KeyC) {
+  if(keyCode === 'a') {
     let updatedEndpoint = 'https://debate-room.herokuapp.com/votes/reset/';
     getStuff(updatedEndpoint);} 
 }
