@@ -50,7 +50,12 @@ h2 {
     display: block;
   }
 
-  .btn-success .btn-danger {
+  .btn-success {
+    margin: 8px;
+    margin-bottom: 24px;
+  }
+
+  .btn-danger {
     margin: 8px;
     margin-bottom: 24px;
   }
