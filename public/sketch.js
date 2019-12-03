@@ -4,18 +4,22 @@ var candidateLastTotal = [];
 var candidateTopVotes = [];
 
 
+
 let nameFont;
 let totalFont;
 
 function preload() {
   nameFont = loadFont('assets/BebasNeue-Regular.ttf');
   totalFont = loadFont('assets/ChakraPetch-Regular.ttf');
+  addCandidates();
   lookupCandidate(); //push names into candidateNames
 }
 
 function setup() {
   createCanvas(window.innerWidth, window.innerHeight);
+  
   lookupCandidate(); //push names into candidateNames
+
 
 
   //get number of candidates
@@ -192,3 +196,25 @@ function sortAllVotes(voteData, candidateID){
 
   // return maxEl;
 }
+
+async function getStuff(endpoint) {
+
+  console.log(endpoint);
+  const response = await fetch(endpoint);
+  const data = await response.text();
+  console.log(data);
+}
+
+function addCandidates(){
+  let candidates = [Biden, Bernie, Warren, Yang];
+
+  for (i = 0; i <= candiates.length; i++) {
+     let choice = candiates[i];
+ 
+     console.log(candidates);
+     let updatedEndpoint = 'https://debate-room.herokuapp.com/candidate/new/' + choice;
+     getStuff(updatedEndpoint);
+     
+   }
+}
+
