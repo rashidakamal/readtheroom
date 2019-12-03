@@ -13,11 +13,11 @@ We wanted to allow for spontaneity in voting, allowing voters more than one vote
 
 We reduced change in candidate score to a simple color and ticker. We felt having a chart showing total change over time would be too noisy to the viewer and distract them from understanding the current sentiment (since spontaneity in voting was what we wanted to prioritize).
 
-We felt the need to allow outliers (voters that have voted more than others and thus have affected the candidate score the most) in Read the Room because our goal is sentiment measurement and outliers reflect strong voter sentiments, we didn’t want to dampen extreme reactions. Therefore we don’t limit the amount of votes per voter. In order to account for outliers, we wanted to make their contribution visible by showing top voters (voters who voted the most) per each candidate. This acknowledges the outliers and makes voters aware that all voters may not be contributing equally by displaying a certain amount of transparency. We also show the top voter (by ID), displaying how many times they voted.
+We felt the need to allow outliers (voters that have voted more than others and thus have affected the candidate score the most) in Read the Room because our goal is sentiment measurement and outliers reflect strong voter sentiments, we didn’t want to dampen extreme reactions. Therefore we don’t limit the amount of votes per voter. In order to account for outliers, we wanted to make their contribution visible by showing top voters (voters who voted the most) per each candidate. This acknowledges the outliers and makes voters aware that all voters may not be contributing equally by displaying a certain amount of transparency. We also show how many times the top voter voted underneath each candidate. This allows voters to get a better understanding of the candidate ranking and the top voters contribution to that score.
 
 Test out Read The Room with a democratic debate video [here.](https://www.youtube.com/watch?v=5_3F2h_FT98)
 
-Scan the QR code below to vote:
+Scan the QR code below to vote!
 
 ![Scan To Vote:](https://github.com/rashidakamal/readtheroom/blob/master/public/assets/IMG_3778.GIF
 )
