@@ -199,21 +199,27 @@ async function getStuff(endpoint) {
 
   console.log(endpoint);
   const response = await fetch(endpoint);
-  const data = await response.text();
-  console.log(data);
+
 }
 
-function addCandidates(){
-  let candidates = ["Biden", "Bernie", "Warren", "Yang"];
+// function addCandidates(){
+//   let candidates = ["Biden", "Bernie", "Warren", "Yang"];
 
-  for (i = 0; i <= candidates.length; i++) {
-     let choice = candidates[i];
+//   for (i = 0; i <= candidates.length; i++) {
+//      let choice = candidates[i];
  
-     console.log(candidates);
-     let updatedEndpoint = 'https://debate-room.herokuapp.com/candidate/new/' + choice;
-     getStuff(updatedEndpoint);
+//      console.log(candidates);
+//      let updatedEndpoint = 'https://debate-room.herokuapp.com/candidate/new/' + choice;
+//      getStuff(updatedEndpoint);
      
-   }
-   console.log('candidates added')
+//    }
+//    console.log('candidates added')
+// }
+
+function keyPressed(){
+
+  if(keyCode == KeyC) {
+    let updatedEndpoint = 'https://debate-room.herokuapp.com/votes/reset/';
+    getStuff(updatedEndpoint);} 
 }
 
