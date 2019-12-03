@@ -3,7 +3,7 @@
 body {
   font-family: 'Chakra Petch', sans-serif;
   /* background: rgb(222, 240, 103); */
-  background: rgb(108, 134, 167);
+  background: rgb(151, 171, 197);
 }
 
 h1 {
@@ -31,7 +31,7 @@ h2 {
     text-align: left;
     max-height: 300px;
     color: rgb(0, 0, 0);
-    background: rgb(108, 134, 167);
+    background: rgb(151, 171, 197);
     /* background: rgb(222, 240, 103); */
   }
   
@@ -50,9 +50,19 @@ h2 {
     display: block;
   }
 
-  .btn {
+  .btn-success {
     margin: 8px;
     margin-bottom: 24px;
+  }
+
+  .btn-danger {
+    margin: 8px;
+    margin-bottom: 24px;
+  }
+
+  .btn-outline-dark {
+    color: rgb(34, 34, 34);
+    /* border-block-color: black; */
   }
 
   /* https://stackoverflow.com/questions/38270661/displaying-a-youtube-video-with-iframe-full-width-of-page */
