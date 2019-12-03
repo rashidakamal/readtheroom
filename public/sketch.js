@@ -110,12 +110,12 @@ function draw() {
       textSize(20);
       fill(255, 255, 255, 100);
 
-      if (candidateTopVotes.length > 0){
+      // if (candidateTopVotes.length > 0){
         text("Most passionate person", rl, th+70);
         text( "voted " + candidateTopVotes[i] + " time(s)", rl, th+106);
   
         var highestVote = lookupAllVotes(i);
-      }
+      // }
 
 
 
