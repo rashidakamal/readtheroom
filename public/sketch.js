@@ -110,10 +110,14 @@ function draw() {
       textSize(20);
       fill(255, 255, 255, 100);
 
-      text("Most passionate person", rl, th+70);
-      text( "voted " + candidateTopVotes[i] + " time(s)", rl, th+106);
+      if (candidateTopVotes.length > 0){
+        text("Most passionate person", rl, th+70);
+        text( "voted " + candidateTopVotes[i] + " time(s)", rl, th+106);
+  
+        var highestVote = lookupAllVotes(i);
+      }
 
-      var highestVote = lookupAllVotes(i);
+
 
 
     }
@@ -221,5 +225,6 @@ function keyTyped(){
   if(keyCode === 'a') {
     let updatedEndpoint = 'https://debate-room.herokuapp.com/votes/reset/';
     getStuff(updatedEndpoint);} 
+    console.log('key pressed')
 }
 
