@@ -20,8 +20,6 @@ function setup() {
   
   lookupCandidate(); //push names into candidateNames
 
-
-
   //get number of candidates
   updateLast();
   setInterval(getCanTotal, 500);
