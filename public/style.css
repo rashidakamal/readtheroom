@@ -9,6 +9,14 @@ body {
 h1 {
   text-align: left;
   font-family: 'Chakra Petch', sans-serif;
+  font-weight: 600;
+  margin: 30px;
+}
+
+h2 {
+  font-size: 24px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.788);
 }
 
 .box.flex {
@@ -16,6 +24,7 @@ h1 {
     justify-content: center;
     align-items: center;
     text-align: left;
+    padding-bottom: 10px;
   }
   
   .box {
@@ -39,6 +48,11 @@ h1 {
   }
   canvas {
     display: block;
+  }
+
+  .btn {
+    margin: 8px;
+    margin-bottom: 24px;
   }
 
   /* https://stackoverflow.com/questions/38270661/displaying-a-youtube-video-with-iframe-full-width-of-page */
