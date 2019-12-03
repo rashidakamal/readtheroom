@@ -11,13 +11,13 @@ let totalFont;
 function preload() {
   nameFont = loadFont('assets/BebasNeue-Regular.ttf');
   totalFont = loadFont('assets/ChakraPetch-Regular.ttf');
-  addCandidates();
   lookupCandidate(); //push names into candidateNames
 }
 
 function setup() {
   createCanvas(window.innerWidth, window.innerHeight);
-  
+  // addCandidates();
+
   lookupCandidate(); //push names into candidateNames
 
   //get number of candidates
@@ -204,15 +204,16 @@ async function getStuff(endpoint) {
 }
 
 function addCandidates(){
-  let candidates = [Biden, Bernie, Warren, Yang];
+  let candidates = ["Biden", "Bernie", "Warren", "Yang"];
 
-  for (i = 0; i <= candiates.length; i++) {
-     let choice = candiates[i];
+  for (i = 0; i <= candidates.length; i++) {
+     let choice = candidates[i];
  
      console.log(candidates);
      let updatedEndpoint = 'https://debate-room.herokuapp.com/candidate/new/' + choice;
      getStuff(updatedEndpoint);
      
    }
+   console.log('candidates added')
 }
 
