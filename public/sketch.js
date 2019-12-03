@@ -1,6 +1,8 @@
 let candidateNames = [];
 var candidateTotal = [];
 var candidateLastTotal = [];
+var candidateTopVotes = [];
+
 
 let nameFont;
 let totalFont;
@@ -39,8 +41,8 @@ function getCanTotal(){
 
 function draw() {
 
-  background(120);
-  frameRate(60);
+  background(108, 134, 167);
+  frameRate(1);
   // console.log(candidateTotal);
 
 
@@ -50,8 +52,8 @@ function draw() {
     var sw = width / (candidateNames.length);
 
     hh = height / 2;
-    nh = hh - 30;
-    th = hh + 50;
+    nh = hh - 70;
+    th = hh + 10;
 
     for (i = 0; i < candidateNames.length; i++) {
       rl = 0 + i * sw + sw / 2;
@@ -65,12 +67,12 @@ function draw() {
 
       //draw name
       textFont(nameFont);
-      textSize(42);
+      textSize(36);
       fill(255, 255, 255, 240);
       text(candidateNames[i], rl, nh);
 
       //draw total w color
-      textSize(34);
+      textSize(48);
       textFont(totalFont);
       let x1 = tl + 16 + 14;
       let y1 = th + 13 - 2;
@@ -87,7 +89,7 @@ function draw() {
 
       } else if (candidateTotal[i] == candidateLastTotal[i]) {
         //render grey text
-        fill(255, 255, 255, 120);
+        fill(255, 255, 255, 150);
         text(candidateTotal[i], rl, th);
 
       } else if (candidateTotal[i] < candidateLastTotal[i]) {
@@ -97,11 +99,32 @@ function draw() {
         triangle(x1, y1-13, x2, y2+13, x3, y3-13);
 
       } else {
-        fill(255, 255, 255, 120);
+        fill(255, 255, 255, 150);
         text(candidateTotal[i], rl, th);
         // text("waiting for number", rl, th);
       }
+
+      //draw all votes
+      textSize(20);
+      fill(255, 255, 255, 100);
+
+      text("Most passionate person", rl, th+70);
+      text( "voted " + candidateTopVotes[i] + " time(s)", rl, th+106);
+
+      var highestVote = lookupAllVotes(i);
+
+
     }
+  } else{
+      //draw waiting screen
+      textAlign(CENTER, CENTER);
+      noStroke();
+
+      //draw rect
+      textFont(nameFont);
+      textSize(36);
+      fill(0,0,0, 200);
+      text("Waiting for Candidates to be Added...", width/2, height/2);
   }
 
 }
@@ -129,3 +152,43 @@ async function getTotal(endpoint) {
 candidateTotal.splice(data.id, 1, data.total)
 }
 
+function lookupAllVotes(candidateID) {
+
+  let updatedEndpoint = 'https://debate-room.herokuapp.com/candidate/' + candidateID + "/allvotes";
+  var response = getAllVotes(updatedEndpoint);
+}
+
+async function getAllVotes(endpoint, candidateID) {
+  const response = await fetch(endpoint);
+  const data = await response.json();
+  sortAllVotes(data, candidateID);
+}
+
+function sortAllVotes(voteData, candidateID){
+
+  if (voteData.length == 0) {
+    return null;
+  }
+  var modeMap = {};
+  var maxVoter = voteData[0].voter;
+  var maxCount = 1;
+  for (i in voteData){
+
+    var el = voteData[i].voter;
+    if(modeMap[el] == null){
+      modeMap[el] = 1;
+    } else {
+      modeMap[el]++;
+    }
+    if (modeMap[el] > maxCount){
+      maxEl = el;
+      maxCount = modeMap[el]
+    }
+  }
+  // console.log(maxEl);
+  // console.log(maxCount);
+  
+  candidateTopVotes.splice(voteData[0].id, 1, maxCount)
+
+  // return maxEl;
+}
