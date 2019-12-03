@@ -17,8 +17,8 @@ We felt the need to allow outliers (voters that have voted more than others and 
 
 Test out Read The Room with a Democratic Debate video [here.](https://www.youtube.com/watch?v=5_3F2h_FT98)
 
-To Vote, scan the QR code below:
-![](IMG_3778.GIF)
+To vote, scan the QR code below:
+![]("public/assets/IMG_3778.GIF")
 
 # API Endpoints:
 
