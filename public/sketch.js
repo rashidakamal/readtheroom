@@ -15,9 +15,10 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(window.innerWidth, window.innerHeight);
-  // addCandidates();
+  // createCanvas(window.innerWidth, window.innerHeight);
+  createCanvas(window.innerWidth, window.innerWidth * 0.195);
 
+  // addCandidates()
   lookupCandidate(); //push names into candidateNames
 
   //get number of candidates
@@ -54,8 +55,8 @@ function draw() {
     var sw = width / (candidateNames.length);
 
     hh = height / 2;
-    nh = hh - 70;
-    th = hh + 10;
+    nh = hh - 95;
+    th = hh-10;
 
     for (i = 0; i < candidateNames.length; i++) {
       rl = 0 + i * sw + sw / 2;
